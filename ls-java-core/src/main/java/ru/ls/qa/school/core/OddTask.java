@@ -3,14 +3,20 @@ package ru.ls.qa.school.core;
 public class OddTask {
 
     public static void main(String[] args){
-        isOdd(2);
-        isOdd(3);
+        int num1 = 2;
+        int num2 = 3;
+        printResult(num1);
+        printResult(num2);
     }
 
-    static void isOdd(int number){
+    private static void printResult(int num) {
+        System.out.println("Число: "+ num +" - "+ (isOdd(num) ? "не четное" : "четное"));
+    }
+
+    static boolean isOdd(int number){
         if(number % 2 == 0){
-            System.out.println("Четное число: "+ number +" "+ false);
+            return false;
         }
-        else System.out.println("Нечетное число: "+ number +" "+ true);
+        return true;
     }
 }
