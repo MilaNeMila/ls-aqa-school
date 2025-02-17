@@ -14,10 +14,5 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-    <parent>
-        <groupId>ru.ls.qa.school.core</groupId>
-        <artifactId>ls-aqa-school</artifactId>
-        <version>1.0-SNAPSHOT</version>
-    </parent>
 
 </project>
