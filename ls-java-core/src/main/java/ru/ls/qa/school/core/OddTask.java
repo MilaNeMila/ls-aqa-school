@@ -9,11 +9,11 @@ public class OddTask {
         printResult(num2);
     }
 
-    private static void printResult(int num) {
-        System.out.println("Число: "+ num +" - "+ (isOdd(num) ? "не четное" : "четное"));
+    public static void printResult(int num) {
+        System.out.println("Число: " + num + " - " + (isOdd(num) ? "не четное" : "четное"));
     }
 
-    static boolean isOdd(int number){
+    public static boolean isOdd(int number){
         if(number % 2 == 0){
             return false;
         }

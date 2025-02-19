@@ -1,6 +1,8 @@
-/ls-java-core/target/*
-/addressbook-web-tests/target/*
+/ls-java-core/target
+/addressbook-web-tests/target
+/target
 
-/ls-java-core/build/*
-/addressbook-web-tests/build/*
-/.idea/
+/ls-java-core/build
+/addressbook-web-tests/build
+/build
+/.idea

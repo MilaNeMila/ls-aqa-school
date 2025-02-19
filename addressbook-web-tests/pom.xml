@@ -15,7 +15,7 @@
     </properties>
 
     <parent>
-        <groupId>ru.ls.qa.school.core</groupId>
+        <groupId>ru.ls.qa.school</groupId>
         <artifactId>ls-aqa-school</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
