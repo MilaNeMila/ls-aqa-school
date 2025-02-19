@@ -17,7 +17,7 @@ public class OddTaskTest {
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {2, 4, 6, -4, 16})
+    @ValueSource(ints = {2, 4, 6, -4, 16, 0})
     public void isNotOddTest(int number){
         assertEquals(ot.isOdd(number), false);
     }
