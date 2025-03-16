@@ -1,8 +1,8 @@
-package LoginTest;
-
 import config.BaseTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import pages.AddressbookPage;
+import pages.GroupsPage;
 import pages.LoginPage;
 
 

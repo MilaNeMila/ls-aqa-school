@@ -14,7 +14,8 @@ public class BaseTest {
         Configuration.browser = "chrome";
         Configuration.baseUrl = "http://localhost:8080/addressbook";
         Configuration.browserSize = "1920x1080";
-        Configuration.headless = true;
+        Configuration.headless = false;
+        Configuration.timeout = 10000;
     }
 
     @BeforeEach
