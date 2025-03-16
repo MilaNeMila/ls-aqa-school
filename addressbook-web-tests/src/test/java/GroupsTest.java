@@ -5,6 +5,8 @@ import pages.AddressbookPage;
 import pages.GroupsPage;
 import pages.LoginPage;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class GroupsTest extends BaseTest {
     private LoginPage loginPage;
     private AddressbookPage addressbookPage;
@@ -14,20 +16,22 @@ public class GroupsTest extends BaseTest {
         loginPage = new LoginPage();
         addressbookPage = new AddressbookPage();
         groupsPage = new GroupsPage();
-    }
-
-    @Test
-    public void testCreateNewGroup(){
         loginPage
                 .enterUsername("admin")
                 .enterPassword("secret")
                 .clickLoginButton();
+    }
+
+    @Test
+    public void testCreateNewGroup(){
         addressbookPage.switchToGroupsPage();
         groupsPage.createNewGroup()
                 .inputGroupNameField("Random Name")
                 .inputGroupHeaderField("Another random things")
                 .inputGroupFooterField("Comment")
-                .clickCreateGroupButton();
+                .clickCreateGroupButton()
+                .clickGroupPageLink()
+                .testText();
     }
 
 }
