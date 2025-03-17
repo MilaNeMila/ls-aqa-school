@@ -20,13 +20,11 @@ public class BaseTest {
 
     @BeforeEach
     public void setUp() {
-        // Открытие браузера перед каждым тестом
-        open("/"); // Указываем базовый URL для тестов
+        open("/");
     }
 
     @AfterEach
     public void tearDown() {
-        // Закрытие браузера после каждого теста
         Selenide.closeWebDriver();
     }
 }

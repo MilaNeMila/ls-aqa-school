@@ -2,13 +2,16 @@ package pages;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import tools.RandomTools;
 
 import static com.codeborne.selenide.Selenide.*;
 
 
 public class GroupsPage {
+    private RandomTools randomTools = new RandomTools();
 
     private final ElementsCollection newGroupButton = $$("input[name='new']");
+    private final ElementsCollection deleteGroupButton = $$("input[name='delete']");
     private final SelenideElement groupNameField = $("input[name='group_name']");
     private final SelenideElement groupHeaderField = $("textarea[name='group_header']");
     private final SelenideElement groupFooterField = $("textarea[name='group_footer']");
@@ -16,6 +19,7 @@ public class GroupsPage {
     private final SelenideElement successfulCreatingText = $(".msgbox");
     private final SelenideElement groupPageLink = $x("//a[text() = 'group page']");
     private final ElementsCollection nameOfNewGroup = $$(".group");
+    private final SelenideElement groupChechboxedList = $("input[title='Select (Articuno)']");
 
 
     public GroupsPage createNewGroup(){
@@ -45,14 +49,13 @@ public class GroupsPage {
         return this;
     }
 
-    public GroupsPage testText(){
-        for(SelenideElement i: nameOfNewGroup){
-            System.out.println(i.getText());
-        }
+    public GroupsPage chooseCreatedGroup(){
+        findGroup().click();
         return this;
     }
 
-    public String getsuccessfulCreatingText(){
-        return successfulCreatingText.getText();
+    private SelenideElement findGroup(){
+        return $("input[title='Select ('"+randomTools.groupName+"')']");
     }
+
 }
