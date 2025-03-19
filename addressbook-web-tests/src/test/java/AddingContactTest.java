@@ -9,6 +9,7 @@ public class AddingContactTest {
     private AddressbookPage addressbookPage;
     private GroupsPage groupsPage;
     private RandomTools randomTools;
+
     @BeforeEach
     public void setGroupsPage(){
         loginPage = new LoginPage();

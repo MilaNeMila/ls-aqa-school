@@ -2,6 +2,8 @@ package pages;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import model.GroupData;
+import org.openqa.selenium.By;
 import tools.RandomTools;
 
 import static com.codeborne.selenide.Selenide.*;
@@ -21,7 +23,7 @@ public class GroupsPage {
             groupPageLink = $x("//a[text() = 'group page']"),
             groupChechboxedList = $("input[title='Select (Articuno)']");
 
-
+    @Step()
     public GroupsPage createNewGroup(){
         newGroupButton.first().click();
         return this;
@@ -31,14 +33,17 @@ public class GroupsPage {
         groupNameField.setValue(group_name);
         return this;
     }
+
     public GroupsPage setGroupHeaderField(String group_header){
         groupHeaderField.setValue(group_header);
         return this;
     }
-    public GroupsPage setGroupFooterField(String group_footer){
-        groupFooterField.setValue(group_footer);
+
+    public GroupsPage setGroupFooterField(String groupFooter){
+        groupFooterField.setValue(groupFooter);
         return this;
     }
+
     public GroupsPage clickCreateGroupButton(){
         createGroupButton.click();
         return this;
@@ -49,13 +54,9 @@ public class GroupsPage {
         return this;
     }
 
-    public GroupsPage chooseCreatedGroup(){
-        findGroup().click();
+    public GroupsPage chooseCreatedGroup(GroupData groupData){
+        By locator = By.cssSelector(String.format("input[title='Select ('%s')']", groupData.getGroupName()));
+        $(locator).click();
         return this;
     }
-
-    private SelenideElement findGroup(){
-        return $("input[title='Select ('"+randomTools.groupName+"')']");
-    }
-
 }

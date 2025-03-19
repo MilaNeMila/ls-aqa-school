@@ -10,9 +10,9 @@ public class AddressbookPage {
     private final SelenideElement groupsButton = $x("//a[text()='groups']"),
     contactAddButton = $x("//a[text()='add new']");
 
-    public AddressbookPage switchToGroupsPage(){
+    public GroupsPage switchToGroupsPage(){
         groupsButton.click();
-        return this;
+        return new GroupsPage();
     }
     public AddressbookPage switchToAddingContactPage(){
         contactAddButton.click();

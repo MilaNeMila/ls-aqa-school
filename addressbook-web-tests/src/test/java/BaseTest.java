@@ -1,4 +1,4 @@
-package config;
+
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
@@ -20,7 +20,7 @@ public class BaseTest {
 
     @BeforeEach
     public void setUp() {
-        open("/");
+        open();
     }
 
     @AfterEach

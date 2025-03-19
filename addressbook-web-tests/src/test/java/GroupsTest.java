@@ -1,24 +1,25 @@
-import config.BaseTest;
+import com.github.javafaker.Faker;
+import model.GroupData;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pages.AddressbookPage;
 import pages.GroupsPage;
 import pages.LoginPage;
-import tools.RandomTools;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class GroupsTest extends BaseTest {
     private LoginPage loginPage;
     private AddressbookPage addressbookPage;
-    private GroupsPage groupsPage;
-    private RandomTools randomTools;
+    private final Faker faker = new Faker();
+    private final GroupData group = GroupData.builder()
+                                             .groupName(faker.name().firstName())
+                                             .groupAuthor(faker.name().lastName())
+                                             .groupDescription(faker.address().fullAddress())
+                                             .build();
     @BeforeEach
     public void setGroupsPage(){
         loginPage = new LoginPage();
         addressbookPage = new AddressbookPage();
-        groupsPage = new GroupsPage();
-        randomTools = new RandomTools();
         loginPage
                 .enterUsername("admin")
                 .enterPassword("secret")
@@ -26,22 +27,21 @@ public class GroupsTest extends BaseTest {
     }
 
     @Test
+    @DisplayName("sdasd")
     public void testCreateNewGroup(){
-        addressbookPage.switchToGroupsPage();
-        groupsPage.createNewGroup()
-                .setGroupNameField(randomTools.groupName)
-                .setGroupHeaderField(randomTools.randomHeader)
-                .setGroupFooterField(randomTools.randomFooter)
-                .clickCreateGroupButton()
-                .clickGroupPageLink()
-                .chooseCreatedGroup();
+        GroupsPage groupsPage = addressbookPage.switchToGroupsPage()
+                                               .createNewGroup()
+                                               .fillGroupForm(group)
+                                               .clickCreateGroupButton()
+                                               .clickGroupPageLink()
+                                               .chooseCreatedGroup();
+
+        groupsPage.checkGroupPage();
     }
 
     @Test
     public void test(){
-        addressbookPage.switchToGroupsPage();
-        groupsPage.chooseCreatedGroup();
+        addressbookPage.switchToGroupsPage()
+                       .chooseCreatedGroup(group);
     }
-
-
 }
