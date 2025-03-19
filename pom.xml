@@ -10,6 +10,11 @@
 
     <packaging>pom</packaging>
 
+    <modules>
+        <module>ls-java-core</module>
+        <module>addressbook-web-tests</module>
+    </modules>
+
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
