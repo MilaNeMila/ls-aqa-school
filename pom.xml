@@ -42,4 +42,10 @@
             <version>1.0.2</version>
         </dependency>
     </dependencies>
+
+    <modules>
+        <module>ls-java-core</module>
+        <module>addressbook-web-tests</module>
+    </modules>
+
 </project>
