@@ -29,9 +29,9 @@ public class GroupsTest extends BaseTest {
     public void testCreateNewGroup(){
         addressbookPage.switchToGroupsPage();
         groupsPage.createNewGroup()
-                .inputGroupNameField(randomTools.groupName)
-                .inputGroupHeaderField(randomTools.randomHeader)
-                .inputGroupFooterField(randomTools.randomFooter)
+                .setGroupNameField(randomTools.groupName)
+                .setGroupHeaderField(randomTools.randomHeader)
+                .setGroupFooterField(randomTools.randomFooter)
                 .clickCreateGroupButton()
                 .clickGroupPageLink()
                 .chooseCreatedGroup();

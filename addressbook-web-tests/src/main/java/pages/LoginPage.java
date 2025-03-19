@@ -5,9 +5,9 @@ import com.codeborne.selenide.SelenideElement;
 import static com.codeborne.selenide.Selenide.$;
 
 public class LoginPage {
-    private final SelenideElement usernameField = $("input[name='user']");
-    private final SelenideElement passwordField = $("input[name='pass']");
-    private final SelenideElement loginButton = $("input[type='submit']");
+    private final SelenideElement usernameField = $("input[name='user']"),
+            passwordField = $("input[name='pass']"),
+            loginButton = $("input[type='submit']");
 
 
     public LoginPage enterUsername(String username){

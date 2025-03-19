@@ -10,16 +10,16 @@ import static com.codeborne.selenide.Selenide.*;
 public class GroupsPage {
     private RandomTools randomTools = new RandomTools();
 
-    private final ElementsCollection newGroupButton = $$("input[name='new']");
-    private final ElementsCollection deleteGroupButton = $$("input[name='delete']");
-    private final SelenideElement groupNameField = $("input[name='group_name']");
-    private final SelenideElement groupHeaderField = $("textarea[name='group_header']");
-    private final SelenideElement groupFooterField = $("textarea[name='group_footer']");
-    private final SelenideElement createGroupButton = $("input[value='Enter information']");
-    private final SelenideElement successfulCreatingText = $(".msgbox");
-    private final SelenideElement groupPageLink = $x("//a[text() = 'group page']");
-    private final ElementsCollection nameOfNewGroup = $$(".group");
-    private final SelenideElement groupChechboxedList = $("input[title='Select (Articuno)']");
+    private final ElementsCollection newGroupButton = $$("input[name='new']"),
+            deleteGroupButton = $$("input[name='delete']"),
+            nameOfNewGroup = $$(".group");
+    private final SelenideElement groupNameField = $("input[name='group_name']"),
+            groupHeaderField = $("textarea[name='group_header']"),
+            groupFooterField = $("textarea[name='group_footer']"),
+            createGroupButton = $("input[value='Enter information']"),
+            successfulCreatingText = $(".msgbox"),
+            groupPageLink = $x("//a[text() = 'group page']"),
+            groupChechboxedList = $("input[title='Select (Articuno)']");
 
 
     public GroupsPage createNewGroup(){
@@ -27,15 +27,15 @@ public class GroupsPage {
         return this;
     }
 
-    public GroupsPage inputGroupNameField(String group_name){
+    public GroupsPage setGroupNameField(String group_name){
         groupNameField.setValue(group_name);
         return this;
     }
-    public GroupsPage inputGroupHeaderField(String group_header){
+    public GroupsPage setGroupHeaderField(String group_header){
         groupHeaderField.setValue(group_header);
         return this;
     }
-    public GroupsPage inputGroupFooterField(String group_footer){
+    public GroupsPage setGroupFooterField(String group_footer){
         groupFooterField.setValue(group_footer);
         return this;
     }

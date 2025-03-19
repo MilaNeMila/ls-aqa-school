@@ -8,6 +8,7 @@ public class RandomTools {
     public String groupName = faker.pokemon().name(),
             randomHeader = faker.gameOfThrones().quote(),
             randomFooter = faker.educator().university();
+    
 
 
 }

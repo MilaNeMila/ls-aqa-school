@@ -7,10 +7,16 @@ import static com.codeborne.selenide.Selenide.$x;
 
 public class AddressbookPage {
 
-    private final SelenideElement groupsButton = $x("//a[text()='groups']");
+    private final SelenideElement groupsButton = $x("//a[text()='groups']"),
+    contactAddButton = $x("//a[text()='add new']");
 
     public AddressbookPage switchToGroupsPage(){
         groupsButton.click();
         return this;
     }
+    public AddressbookPage switchToAddingContactPage(){
+        contactAddButton.click();
+        return this;
+    }
 }
+
