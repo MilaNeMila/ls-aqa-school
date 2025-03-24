@@ -10,7 +10,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class GroupData {
-    private String groupName;
-    private String groupDescription;
-    private String groupAuthor;
+    public String groupName;
+    public String groupHeader;
+    public String groupFooter;
+
 }

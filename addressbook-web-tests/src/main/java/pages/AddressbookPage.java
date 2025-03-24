@@ -14,9 +14,9 @@ public class AddressbookPage {
         groupsButton.click();
         return new GroupsPage();
     }
-    public AddressbookPage switchToAddingContactPage(){
+    public AddingContactPage switchToAddingContactPage(){
         contactAddButton.click();
-        return this;
+        return new AddingContactPage();
     }
 }
 

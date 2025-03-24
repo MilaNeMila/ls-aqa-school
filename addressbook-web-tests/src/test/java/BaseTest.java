@@ -20,7 +20,7 @@ public class BaseTest {
 
     @BeforeEach
     public void setUp() {
-        open();
+        open("/");
     }
 
     @AfterEach
