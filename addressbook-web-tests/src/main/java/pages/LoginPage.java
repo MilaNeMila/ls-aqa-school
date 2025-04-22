@@ -9,7 +9,6 @@ public class LoginPage {
             passwordField = $("input[name='pass']"),
             loginButton = $("input[type='submit']");
 
-
     public LoginPage enterUsername(String username){
         usernameField.setValue(username);
         return this;
@@ -24,6 +23,4 @@ public class LoginPage {
         loginButton.click();
         return this;
     }
-
-
 }

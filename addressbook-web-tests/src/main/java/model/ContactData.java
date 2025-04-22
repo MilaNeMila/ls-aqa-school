@@ -7,9 +7,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class GroupData {
-    public String groupName;
-    public String groupHeader;
-    public String groupFooter;
-
+public class ContactData {
+    public String contactName;
+    public String contactMiddleName;
+    public String contactLastName;
 }
