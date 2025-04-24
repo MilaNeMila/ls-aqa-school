@@ -13,6 +13,7 @@ public class ContactTest extends BaseTest{
             .contactName(faker.name().firstName())
             .contactMiddleName(faker.name().firstName())
             .contactLastName(faker.name().lastName())
+            .nicknameContactName(faker.name().firstName())
             .build();
 
     @Test
@@ -23,6 +24,18 @@ public class ContactTest extends BaseTest{
                 .clickCreateContactButton()
                 .switchToAddressbookPage();
         addressbookPage.checkValueInColumn(contactData.contactName).shouldBe(visible);
+    }
+
+    @Test
+    @DisplayName("Изменение контакта")
+    public void testEditContact(){
+        AddressbookPage addressbookPage = basePage.switchToCreatingContactPage()
+                .fillContactForm(contactData)
+                .clickCreateContactButton()
+                .switchToAddressbookPage()
+                .editCreatedContact(contactData.contactName, contactData.contactLastName)
+                .updateContactForm(contactData.nicknameContactName)
+                .clickCreateContactButton();
     }
     @AfterEach
     public void removeCreatedContact(){

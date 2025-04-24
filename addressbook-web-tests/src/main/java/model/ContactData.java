@@ -11,4 +11,5 @@ public class ContactData {
     public String contactName;
     public String contactMiddleName;
     public String contactLastName;
+    public String nicknameContactName;
 }
