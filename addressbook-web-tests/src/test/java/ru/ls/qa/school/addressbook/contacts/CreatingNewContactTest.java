@@ -1,13 +1,16 @@
+package ru.ls.qa.school.addressbook.contacts;
+
 import model.ContactData;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import pages.contacts.AddressbookPage;
 import pages.BasePage;
+import pages.contacts.AddressbookPage;
+import ru.ls.qa.school.addressbook.BaseTest;
 
 import static com.codeborne.selenide.Condition.visible;
 
-public class ContactTest extends BaseTest{
+public class CreatingNewContactTest extends BaseTest {
     private BasePage basePage = new BasePage();
     private final ContactData contactData = ContactData.builder()
             .contactName(faker.name().firstName())
@@ -26,21 +29,9 @@ public class ContactTest extends BaseTest{
         addressbookPage.checkValueInColumn(contactData.contactName).shouldBe(visible);
     }
 
-    @Test
-    @DisplayName("Изменение контакта")
-    public void testEditContact(){
-        AddressbookPage addressbookPage = basePage.switchToCreatingContactPage()
-                .fillContactForm(contactData)
-                .clickCreateContactButton()
-                .switchToAddressbookPage()
-                .editCreatedContact(contactData.contactName, contactData.contactLastName)
-                .updateContactForm(contactData.nicknameContactName)
-                .clickCreateContactButton();
-    }
     @AfterEach
     public void removeCreatedContact(){
         AddressbookPage addressbookPage = basePage.switchToAddressbookPage()
                 .removeContact(contactData.contactName, contactData.contactLastName);
     }
-
 }

@@ -25,13 +25,20 @@ public class AddressbookPage extends BasePage {
         return this;
     }
 
+    public static boolean checkingContactsOnPage(){
+        if($$("tr[name='entry']").isEmpty()){
+            return true;
+        }
+        else return false;
+    }
+
     public CreatingContactPage editCreatedContact(String firstName, String lastName) throws ElementNotFound {
         ElementsCollection listOfContacts = $$("tr[name='entry']");
-        Optional<SelenideElement> test = listOfContacts.stream().filter(element -> element.find("input[title]")
+        Optional<SelenideElement> contact = listOfContacts.stream().filter(element -> element.find("input[title]")
                 .getAttribute("title")
                 .equals(String.format("Select (%s %s)", firstName, lastName))).findFirst();
-        if(test.isPresent()){
-           test.get().find("a[href*='edit.php']").click();
+        if(contact.isPresent()){
+           contact.get().find("a[href*='edit.php']").click();
         }
         else throw new ElementNotFound(Alias.NONE, "Элемента нет на странице",visible);
         return new CreatingContactPage();

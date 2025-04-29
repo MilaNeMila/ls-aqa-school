@@ -1,3 +1,5 @@
+package ru.ls.qa.school.addressbook;
+
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import com.github.javafaker.Faker;
@@ -16,8 +18,6 @@ public class BaseTest {
     private final LoginPage loginPage = new LoginPage();
     private static final DriverConfig DRIVER_CONFIG = ConfigHelper.getDriverConfig();
     private static final WebConfig URL_CONFIG = ConfigHelper.getWebConfig();
-
-
 
     @BeforeAll
     public static void setup(){
