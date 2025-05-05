@@ -2,6 +2,7 @@ package ru.ls.qa.school.addressbook.contacts;
 
 import model.ContactData;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pages.BasePage;
@@ -17,13 +18,25 @@ public class UpdatingContactTest extends BaseTest {
             .nicknameContactName(faker.name().firstName())
             .build();
 
+    @BeforeEach
+    public void checkingContactOnPages(){
+        AddressbookPage addressbookPage = basePage.switchToAddressbookPage();
+        if (AddressbookPage.checkingContactsOnPage()){
+            basePage.switchToCreatingContactPage()
+                    .fillContactForm(contactData)
+                    .clickCreateContactButton();
+        }
+        else {
+            contactData.contactName = AddressbookPage.saveCreatedContact(1);
+            contactData.contactLastName = AddressbookPage.saveCreatedContact(0);
+        }
+
+    }
+
     @Test
     @DisplayName("Изменение контакта")
     public void testEditContact(){
-        AddressbookPage addressbookPage = basePage.switchToCreatingContactPage()
-                .fillContactForm(contactData)
-                .clickCreateContactButton()
-                .switchToAddressbookPage()
+        AddressbookPage addressbookPage = basePage.switchToAddressbookPage()
                 .editCreatedContact(contactData.contactName, contactData.contactLastName)
                 .updateContactForm(contactData.nicknameContactName)
                 .clickCreateContactButton();

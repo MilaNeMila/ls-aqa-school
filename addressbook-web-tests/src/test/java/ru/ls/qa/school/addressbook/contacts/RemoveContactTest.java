@@ -9,12 +9,12 @@ import pages.contacts.AddressbookPage;
 import pages.BasePage;
 import ru.ls.qa.school.addressbook.BaseTest;
 
-
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selenide.switchTo;
 import static com.codeborne.selenide.logevents.SelenideLogger.step;
 
 public class RemoveContactTest extends BaseTest {
     private BasePage basePage = new BasePage();
+    private AddressbookPage addressbookPage;
     private final ContactData contactData = ContactData.builder()
             .contactName(faker.name().firstName())
             .contactMiddleName(faker.name().firstName())
@@ -24,22 +24,25 @@ public class RemoveContactTest extends BaseTest {
 
     @BeforeEach
     public void checkingContactOnPages(){
-        basePage.switchToAddressbookPage();
-        if (AddressbookPage.checkingContactsOnPage() == true){
+        addressbookPage = basePage.switchToAddressbookPage();
+        if (AddressbookPage.checkingContactsOnPage()){
             basePage.switchToCreatingContactPage()
                     .fillContactForm(contactData)
-                    .clickCreateContactButton()
-                    .switchToAddressbookPage();
+                    .clickCreateContactButton();
         }
+        else {
+            contactData.contactName = AddressbookPage.saveCreatedContact(1);
+            contactData.contactLastName = AddressbookPage.saveCreatedContact(0);
+            }
+
     }
 
     @Test
     @DisplayName("Удаление контакта")
     public void testRemoveCreatedContact(){
         step("Удалить найденную запись", () ->{
-        //AddressbookPage addressbookPage = addressbookPage.removeContact(contactData.contactName, contactData.contactLastName);
+            addressbookPage.removeContact(contactData.contactName, contactData.contactLastName);
     });
     }
-
 
 }

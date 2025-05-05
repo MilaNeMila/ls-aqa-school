@@ -12,7 +12,6 @@ public class CreatingContactPage extends BasePage {
 
     public CreatingContactPage fillContactForm(ContactData contactData){
         firstNameField.setValue(contactData.contactName);
-        System.out.println(contactData.contactName);
         middleNameField.setValue(contactData.contactMiddleName);
         lastNameField.setValue(contactData.contactLastName);
         return this;
@@ -20,7 +19,6 @@ public class CreatingContactPage extends BasePage {
 
     public CreatingContactPage updateContactForm(String updatedContactName) {
         nicknameField.setValue(updatedContactName);
-        System.out.println(updatedContactName);
         return this;
     }
 
