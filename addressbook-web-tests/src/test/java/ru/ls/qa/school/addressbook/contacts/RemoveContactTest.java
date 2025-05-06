@@ -31,8 +31,7 @@ public class RemoveContactTest extends BaseTest {
                     .clickCreateContactButton();
         }
         else {
-            contactData.contactName = AddressbookPage.saveCreatedContact(1);
-            contactData.contactLastName = AddressbookPage.saveCreatedContact(0);
+            AddressbookPage.saveCreatedContact(contactData);
             }
 
     }
@@ -41,7 +40,7 @@ public class RemoveContactTest extends BaseTest {
     @DisplayName("Удаление контакта")
     public void testRemoveCreatedContact(){
         step("Удалить найденную запись", () ->{
-            addressbookPage.removeContact(contactData.contactName, contactData.contactLastName);
+            addressbookPage.removeContact(contactData);
     });
     }
 
