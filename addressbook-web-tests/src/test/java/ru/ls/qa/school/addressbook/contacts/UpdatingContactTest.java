@@ -27,8 +27,7 @@ public class UpdatingContactTest extends BaseTest {
                     .clickCreateContactButton();
         }
         else {
-            contactData.contactName = AddressbookPage.saveCreatedContact(1);
-            contactData.contactLastName = AddressbookPage.saveCreatedContact(0);
+            AddressbookPage.saveCreatedContact(contactData);
         }
 
     }
@@ -37,14 +36,14 @@ public class UpdatingContactTest extends BaseTest {
     @DisplayName("Изменение контакта")
     public void testEditContact(){
         AddressbookPage addressbookPage = basePage.switchToAddressbookPage()
-                .editCreatedContact(contactData.contactName, contactData.contactLastName)
-                .updateContactForm(contactData.nicknameContactName)
+                .editCreatedContact(contactData)
+                .updateContactForm(contactData)
                 .clickCreateContactButton();
     }
 
     @AfterEach
     public void removeCreatedContact(){
         AddressbookPage addressbookPage = basePage.switchToAddressbookPage()
-                .removeContact(contactData.contactName, contactData.contactLastName);
+                .removeContact(contactData);
     }
 }

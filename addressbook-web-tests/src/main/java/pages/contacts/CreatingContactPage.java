@@ -17,8 +17,8 @@ public class CreatingContactPage extends BasePage {
         return this;
      }
 
-    public CreatingContactPage updateContactForm(String updatedContactName) {
-        nicknameField.setValue(updatedContactName);
+    public CreatingContactPage updateContactForm(ContactData contactData) {
+        nicknameField.setValue(contactData.nicknameContactName);
         return this;
     }
 

@@ -26,12 +26,12 @@ public class CreatingNewContactTest extends BaseTest {
                 .fillContactForm(contactData)
                 .clickCreateContactButton()
                 .switchToAddressbookPage();
-        addressbookPage.checkValueInColumn(contactData.contactName).shouldBe(visible);
+        addressbookPage.checkValueInColumn(contactData).shouldBe(visible);
     }
 
     @AfterEach
     public void removeCreatedContact(){
         AddressbookPage addressbookPage = basePage.switchToAddressbookPage()
-                .removeContact(contactData.contactName, contactData.contactLastName);
+                .removeContact(contactData);
     }
 }
