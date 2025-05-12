@@ -10,7 +10,7 @@ import pages.contacts.AddressbookPage;
 import ru.ls.qa.school.addressbook.BaseTest;
 
 public class UpdatingContactTest extends BaseTest {
-    private BasePage basePage = new BasePage();
+    private final BasePage basePage = new BasePage();
     private final ContactData contactData = ContactData.builder()
             .contactName(faker.name().firstName())
             .contactMiddleName(faker.name().firstName())
@@ -43,7 +43,6 @@ public class UpdatingContactTest extends BaseTest {
 
     @AfterEach
     public void removeCreatedContact(){
-        AddressbookPage addressbookPage = basePage.switchToAddressbookPage()
-                .removeContact(contactData);
+        basePage.switchToAddressbookPage().removeContact(contactData);
     }
 }
