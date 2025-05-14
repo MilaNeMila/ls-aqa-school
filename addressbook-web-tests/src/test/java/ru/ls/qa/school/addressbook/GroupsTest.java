@@ -1,9 +1,12 @@
+package ru.ls.qa.school.addressbook;
+
 import model.GroupData;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pages.BasePage;
 import pages.groups.GroupsPage;
+import ru.ls.qa.school.addressbook.BaseTest;
 
 import static com.codeborne.selenide.Condition.visible;
 
