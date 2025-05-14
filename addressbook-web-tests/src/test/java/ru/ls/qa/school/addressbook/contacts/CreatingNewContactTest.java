@@ -5,7 +5,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pages.BasePage;
-import pages.contacts.AddressbookPage;
+import pages.contacts.ContactListPage;
 import ru.ls.qa.school.addressbook.BaseTest;
 
 import static com.codeborne.selenide.Condition.visible;
@@ -20,18 +20,18 @@ public class CreatingNewContactTest extends BaseTest {
             .build();
 
     @Test
-    @DisplayName("Создание контакта")
+    @DisplayName("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ")
     public void testCreateNewContact(){
-        AddressbookPage addressbookPage = basePage.switchToCreatingContactPage()
-                .fillContactForm(contactData)
-                .clickCreateContactButton()
-                .switchToAddressbookPage();
-        addressbookPage.checkValueInColumn(contactData).shouldBe(visible);
+        ContactListPage contactListPage = basePage.goToCreateContact()
+                                                  .fillContactForm(contactData)
+                                                  .clickCreateContactButton()
+                                                  .goToContactList();
+        contactListPage.checkValueInColumn(contactData).shouldBe(visible);
     }
 
     @AfterEach
     public void removeCreatedContact(){
-        AddressbookPage addressbookPage = basePage.switchToAddressbookPage()
-                .removeContact(contactData);
+        ContactListPage contactListPage = basePage.goToContactList()
+                                                  .removeContact(contactData);
     }
 }

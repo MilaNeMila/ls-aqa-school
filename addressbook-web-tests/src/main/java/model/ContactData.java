@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ContactData {
+    public String id;
     public String contactName;
     public String contactMiddleName;
     public String contactLastName;
