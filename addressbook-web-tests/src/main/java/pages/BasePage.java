@@ -1,13 +1,16 @@
 package pages;
 
 import com.codeborne.selenide.SelenideElement;
-import pages.contacts.AddressbookPage;
-import pages.contacts.CreatingContactPage;
+import pages.contacts.ContactListPage;
+import pages.contacts.CreationContactPage;
 import pages.groups.GroupsPage;
 
 import static com.codeborne.selenide.Selenide.$x;
 
-public class BasePage {
+public abstract class BasePage {
+
+    static PageManager pages;
+
     private final SelenideElement groupsButton = $x("//a[text()='groups']");
     private final SelenideElement contactAddButton = $x("//a[text()='add new']");
     private final SelenideElement contactButton = $x("//a[text()='home']");
@@ -18,13 +21,19 @@ public class BasePage {
         return new GroupsPage();
     }
 
-    public CreatingContactPage switchToCreatingContactPage(){
+    public CreationContactPage goToCreateContact(){
         contactAddButton.click();
-        return new CreatingContactPage();
+        return new CreationContactPage();
     }
 
-    public AddressbookPage switchToAddressbookPage(){
+    public ContactListPage goToContactList(){
         contactButton.click();
-        return new AddressbookPage();
+        return new ContactListPage();
     }
+
+    public static PageManager pages() {
+        return pages;
+    }
+
+
 }

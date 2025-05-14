@@ -1,12 +1,13 @@
 package ru.ls.qa.school.addressbook.contacts;
 
+import com.codeborne.selenide.Selenide;
 import model.ContactData;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pages.BasePage;
-import pages.contacts.AddressbookPage;
+import pages.contacts.ContactListPage;
 import ru.ls.qa.school.addressbook.BaseTest;
 
 public class UpdatingContactTest extends BaseTest {
@@ -20,29 +21,29 @@ public class UpdatingContactTest extends BaseTest {
 
     @BeforeEach
     public void checkingContactOnPages(){
-        AddressbookPage addressbookPage = basePage.switchToAddressbookPage();
-        if (AddressbookPage.checkingContactsOnPage()){
-            basePage.switchToCreatingContactPage()
+        ContactListPage contactListPage = basePage.goToContactList();
+        if (ContactListPage.checkingContactsOnPage()){
+            basePage.goToCreateContact()
                     .fillContactForm(contactData)
                     .clickCreateContactButton();
         }
         else {
-            AddressbookPage.saveCreatedContact(contactData);
+            ContactListPage.getFirstContact(contactData);
         }
 
     }
 
     @Test
-    @DisplayName("Изменение контакта")
+    @DisplayName("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ")
     public void testEditContact(){
-        AddressbookPage addressbookPage = basePage.switchToAddressbookPage()
-                .editCreatedContact(contactData)
-                .updateContactForm(contactData)
-                .clickCreateContactButton();
+        ContactListPage contactListPage = basePage.goToContactList()
+                                                  .editCreatedContact(contactData)
+                                                  .updateContactForm(contactData)
+                                                  .clickCreateContactButton();
     }
 
     @AfterEach
     public void removeCreatedContact(){
-        basePage.switchToAddressbookPage().removeContact(contactData);
+        basePage.goToContactList().removeContact(contactData);
     }
 }
