@@ -1,6 +1,7 @@
 package pages;
 
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Selenide.$;
 
@@ -9,17 +10,20 @@ public class LoginPage {
             passwordField = $("input[name='pass']"),
             loginButton = $("input[type='submit']");
 
-    public LoginPage enterUsername(String username){
+    @Step("Заполнить логин")
+    public LoginPage enterUsername(String username) {
         usernameField.setValue(username);
         return this;
     }
 
-    public LoginPage enterPassword(String password){
+    @Step("Заполнить пароль")
+    public LoginPage enterPassword(String password) {
         passwordField.setValue(password);
         return this;
     }
 
-    public LoginPage clickLoginButton(){
+    @Step("Нажать кнопку авторизации")
+    public LoginPage clickLoginButton() {
         loginButton.click();
         return this;
     }

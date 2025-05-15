@@ -11,7 +11,6 @@ import ru.ls.qa.school.addressbook.BaseTest;
 import static com.codeborne.selenide.Condition.visible;
 
 public class GroupsTest extends BaseTest {
-    private final BasePage basePage = new BasePage();
     private final GroupData groupData = GroupData.builder()
             .groupName(faker.name().firstName())
             .groupFooter(faker.name().lastName())
@@ -20,18 +19,18 @@ public class GroupsTest extends BaseTest {
 
     @Test
     @DisplayName("Создание группы")
-    public void testCreateNewGroup(){
-        GroupsPage groupsPage = basePage.switchToGroupsPage()
-                                               .createNewGroup()
-                                               .fillGroupForm(groupData)
-                                               .clickCreateGroupButton()
-                                               .clickGroupPageLink();
+    public void testCreateNewGroup() {
+        GroupsPage groupsPage = getPage.contactList().switchToGroupsPage()
+                .createNewGroup()
+                .fillGroupForm(groupData)
+                .clickCreateGroupButton()
+                .clickGroupPageLink();
         groupsPage.chooseCreatedGroup(groupData.groupName).shouldBe(visible);
     }
 
     @AfterEach
-    public void removeCreatedGroup(){
-        GroupsPage groupsPage = basePage.switchToGroupsPage()
+    public void removeCreatedGroup() {
+        GroupsPage groupsPage = getPage.contactList().switchToGroupsPage()
                 .removeCreatedGroup(groupData.groupName);
     }
 }

@@ -24,11 +24,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>io.qameta.allure</groupId>
-            <artifactId>allure-test-filter</artifactId>
-            <version>${allure.version}</version>
-        </dependency>
-        <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-params</artifactId>
             <version>5.11.3</version>
@@ -70,6 +65,11 @@
             <artifactId>assertj-guava</artifactId>
             <version>3.27.2</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-java-commons</artifactId>
+            <version>${allure.version}</version>
         </dependency>
     </dependencies>
 

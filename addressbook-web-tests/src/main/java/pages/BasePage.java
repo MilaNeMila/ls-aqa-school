@@ -16,17 +16,17 @@ public abstract class BasePage {
     private final SelenideElement contactButton = $x("//a[text()='home']");
 
 
-    public GroupsPage switchToGroupsPage(){
+    public GroupsPage switchToGroupsPage() {
         groupsButton.click();
         return new GroupsPage();
     }
 
-    public CreationContactPage goToCreateContact(){
+    public CreationContactPage goToCreateContact() {
         contactAddButton.click();
         return new CreationContactPage();
     }
 
-    public ContactListPage goToContactList(){
+    public ContactListPage goToContactList() {
         contactButton.click();
         return new ContactListPage();
     }
@@ -34,6 +34,5 @@ public abstract class BasePage {
     public static PageManager pages() {
         return pages;
     }
-
 
 }

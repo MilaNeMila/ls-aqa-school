@@ -11,7 +11,6 @@ import pages.contacts.ContactListPage;
 import ru.ls.qa.school.addressbook.BaseTest;
 
 public class UpdatingContactTest extends BaseTest {
-    private final BasePage basePage = new BasePage();
     private final ContactData contactData = ContactData.builder()
             .contactName(faker.name().firstName())
             .contactMiddleName(faker.name().firstName())
@@ -20,30 +19,29 @@ public class UpdatingContactTest extends BaseTest {
             .build();
 
     @BeforeEach
-    public void checkingContactOnPages(){
-        ContactListPage contactListPage = basePage.goToContactList();
-        if (ContactListPage.checkingContactsOnPage()){
-            basePage.goToCreateContact()
+    public void checkingContactOnPages() {
+        ContactListPage contactListPage = getPage.contactList().goToContactList();
+        if (contactListPage.checkingContactsOnPage()) {
+            getPage.contactList().goToCreateContact()
                     .fillContactForm(contactData)
                     .clickCreateContactButton();
-        }
-        else {
-            ContactListPage.getFirstContact(contactData);
+        } else {
+            contactListPage.getFirstContact();
         }
 
     }
 
     @Test
     @DisplayName("��������� ��������")
-    public void testEditContact(){
-        ContactListPage contactListPage = basePage.goToContactList()
-                                                  .editCreatedContact(contactData)
-                                                  .updateContactForm(contactData)
-                                                  .clickCreateContactButton();
+    public void testEditContact() {
+        ContactListPage contactListPage = getPage.contactList().goToContactList()
+                .editCreatedContact(contactData)
+                .updateContactForm(contactData)
+                .clickCreateContactButton();
     }
 
     @AfterEach
-    public void removeCreatedContact(){
-        basePage.goToContactList().removeContact(contactData);
+    public void removeCreatedContact() {
+        getPage.contactList().goToContactList().removeContact(contactData);
     }
 }
