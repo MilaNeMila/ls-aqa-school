@@ -26,16 +26,11 @@ public class BaseTest {
         Configuration.headless = false;
         Configuration.timeout = 10000;
 
-
-    }
-
-    @BeforeAll
-    public static void setUp() {
         open("/");
         getPage.loginPage()
-                .enterUsername("admin")
-                .enterPassword("secret")
-                .clickLoginButton();
+               .enterUsername("admin")
+               .enterPassword("secret")
+               .clickLoginButton();
     }
 
     @AfterAll

@@ -4,7 +4,6 @@ import model.ContactData;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import pages.BasePage;
 import pages.contacts.ContactListPage;
 import ru.ls.qa.school.addressbook.BaseTest;
 

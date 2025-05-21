@@ -8,9 +8,6 @@ public class PageManager {
     private static PageManager instance;
 
     private PageManager(){
-        instance.contactListPage = new ContactListPage();
-        instance.creationContactPage = new CreationContactPage();
-        instance.loginPage = new LoginPage();
     }
 
     private ContactListPage contactListPage;
@@ -20,6 +17,11 @@ public class PageManager {
     public static PageManager init() {
         if (instance == null) {
             instance = new PageManager();
+
+            instance.contactListPage = new ContactListPage();
+            instance.creationContactPage = new CreationContactPage();
+            instance.loginPage = new LoginPage();
+
             BasePage.pages = instance;
         }
         return instance;
