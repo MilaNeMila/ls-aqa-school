@@ -10,7 +10,6 @@ import model.Contacts;
 import pages.BasePage;
 
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
@@ -21,31 +20,30 @@ public class ContactListPage extends BasePage {
     private final SelenideElement contactDeleteButton = $("input[value='Delete']");
     private static final ElementsCollection listOfContacts = $$("tr[name='entry']");
 
-    @Step("РџРѕРёСЃРє РєРѕРЅС‚Р°РєС‚Р°")
+    @Step("Поиск контакта")
     public SelenideElement checkValueInColumn(ContactData contactData) {
         return valueInColumn.findBy(text(String.valueOf(contactData.contactName)));
     }
 
-    @Step("РЈРґР°Р»РµРЅРёРµ РєРѕРЅС‚Р°РєС‚Р°")
+    @Step("Удаление контакта")
     public ContactListPage removeContact(ContactData contactData) {
         $(String.format("[title='Select (%s %s)']", contactData.contactName, contactData.contactLastName)).click();
         contactDeleteButton.click();
         switchTo().alert()
-                .accept(); // РЅР°Р¶Р°С‚СЊ "РѕРє" РЅР° Р°Р»РµСЂС‚, РєРѕС‚РѕСЂС‹Р№ РїРѕСЏРІР»СЏРµС‚СЃСЏ РїСЂРё СѓРґР°Р»РµРЅРёРё РєРѕРЅС‚Р°РєС‚Р°; switchTo-- РїРµСЂРµРєР»СЋС‡РµРЅРёРµ РјРµР¶РґСѓ РІРєР»Р°РґРєР°РјРё
+                .accept(); // нажать "ок" на алерт, который появляется при удалении контакта; switchTo-- переключение между вкладками
         return this;
     }
 
-    @Step("РџСЂРѕРІРµСЂРєР° СЃРїРёСЃРєР° РєРѕРЅС‚Р°РєС‚РѕРІ РЅР° СЃС‚СЂР°РЅРёС†Рµ")
+    @Step("Проверка списка контактов на странице")
     public boolean checkingContactsOnPage() {
         return listOfContacts.isEmpty();
     }
 
-    @Step("РџРѕР»СѓС‡РµРЅРёРµ РїРµСЂРІРѕРіРѕ РєРѕРЅС‚Р°РєС‚РЅР° РёР· СЃРїРёСЃРєР°")
+    @Step("Получение первого контактна из списка")
     public ContactData getFirstContact() {
         SelenideElement sourceContact = listOfContacts.first()
                 .$("td");
         return ContactData.builder()
-                //.id(Integer.parseInt($x("//tr/td[1]").getAttribute("id")))
                 .contactName(sourceContact.sibling(1)
                         .getText())
                 .contactLastName(sourceContact.sibling(0)
@@ -53,26 +51,31 @@ public class ContactListPage extends BasePage {
                 .build();
     }
 
-    @Step("РР·РјРµРЅРµРЅРёРµ РєРѕРЅС‚Р°РєС‚РЅР°")
-    public CreationContactPage editCreatedContact(ContactData contactData) throws ElementNotFound {
-        Optional<SelenideElement> contact = listOfContacts.stream()
+    @Step
+    public Optional<SelenideElement> findAnElement(ContactData contactData) {
+        return listOfContacts.stream()
                 .filter(element -> element.find("input[title]")
                         .getAttribute("title")
                         .equals(String.format("Select (%s %s)", contactData.contactName, contactData.contactLastName)))
                 .findFirst();
-        if (contact.isPresent()) {
-            contact.get()
+    }
+
+
+    @Step("Изменение контактна")
+    public CreationContactPage editCreatedContact(ContactData contactData) throws ElementNotFound {
+        if (findAnElement(contactData).isPresent()) {
+            findAnElement(contactData).get()
                     .find("a[href*='edit.php']")
                     .click();
-        } else throw new ElementNotFound(Alias.NONE, "Р­Р»РµРјРµРЅС‚Р° РЅРµС‚ РЅР° СЃС‚СЂР°РЅРёС†Рµ", visible);
+        } else throw new ElementNotFound(Alias.NONE, "Элемента нет на странице", visible);
         return pages().getCreatingContactPage();
     }
 
-    @Step("Р¤РѕСЂРјРёСЂРѕРІР°РЅРёРµ СЃРїРёСЃРєР° РєРѕРЅС‚Р°РєС‚РѕРІ")
+    @Step("Формирование списка контактов")
     public Contacts getContactList() {
         Contacts contacts = new Contacts();
         for (SelenideElement element : listOfContacts) {
-            int id = Integer.parseInt(element.$("td").$("input").getAttribute("id")); //РІСЃРµ РѕРє
+            int id = Integer.parseInt(element.$("td").$("input").getAttribute("id")); //все ок
             String contactName = element.$("td").sibling(1)
                     .getText();
             String contactLastName = element.$("td").sibling(0)
@@ -84,7 +87,7 @@ public class ContactListPage extends BasePage {
         return contacts;
     }
 
-    @Step("РџРѕР»СѓС‡РёС‚СЊ РєРѕР»РёС‡РµСЃС‚РІРѕ СЌР»РµРјРµРЅС‚РѕРІ РЅР° СЃС‚СЂР°РЅРёС†Рµ")
+    @Step("Получить количество элементов на странице")
     public int sizeOfContactList(Contacts contacts) {
         return contacts.size();
     }
