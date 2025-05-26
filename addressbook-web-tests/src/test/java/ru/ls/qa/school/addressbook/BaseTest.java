@@ -5,6 +5,8 @@ import com.codeborne.selenide.Selenide;
 import com.github.javafaker.Faker;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
+import pages.BasePage;
+import pages.LoginPage;
 import pages.PageManager;
 import tools.ConfigHelper;
 import tools.DriverConfig;
@@ -19,14 +21,14 @@ public class BaseTest {
     private static final WebConfig URL_CONFIG = ConfigHelper.getWebConfig();
 
     @BeforeAll
-    public static void setup(){
+    public static void setup() {
         Configuration.browser = DRIVER_CONFIG.browser();
         Configuration.baseUrl = URL_CONFIG.baseUrl();
         Configuration.browserSize = "1920x1080";
         Configuration.headless = false;
         Configuration.timeout = 10000;
 
-        open("/");
+        open("");
         getPage.loginPage()
                .enterUsername("admin")
                .enterPassword("secret")
@@ -38,7 +40,7 @@ public class BaseTest {
         Selenide.closeWebDriver();
     }
 
-    public PageManager pages(){
+    public PageManager pages() {
         return getPage;
     }
 }

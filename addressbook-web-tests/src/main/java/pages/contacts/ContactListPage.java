@@ -6,9 +6,11 @@ import com.codeborne.selenide.ex.ElementNotFound;
 import com.codeborne.selenide.impl.Alias;
 import io.qameta.allure.Step;
 import model.ContactData;
+import model.Contacts;
 import pages.BasePage;
 
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
@@ -43,7 +45,7 @@ public class ContactListPage extends BasePage {
         SelenideElement sourceContact = listOfContacts.first()
                 .$("td");
         return ContactData.builder()
-                .id($x("//tr/td[1]").getAttribute("id"))
+                //.id(Integer.parseInt($x("//tr/td[1]").getAttribute("id")))
                 .contactName(sourceContact.sibling(1)
                         .getText())
                 .contactLastName(sourceContact.sibling(0)
@@ -53,7 +55,6 @@ public class ContactListPage extends BasePage {
 
     @Step("Изменение контактна")
     public CreationContactPage editCreatedContact(ContactData contactData) throws ElementNotFound {
-        ElementsCollection listOfContacts = $$("tr[name='entry']");
         Optional<SelenideElement> contact = listOfContacts.stream()
                 .filter(element -> element.find("input[title]")
                         .getAttribute("title")
@@ -65,6 +66,27 @@ public class ContactListPage extends BasePage {
                     .click();
         } else throw new ElementNotFound(Alias.NONE, "Элемента нет на странице", visible);
         return pages().getCreatingContactPage();
+    }
+
+    @Step("Формирование списка контактов")
+    public Contacts getContactList() {
+        Contacts contacts = new Contacts();
+        for (SelenideElement element : listOfContacts) {
+            int id = Integer.parseInt(element.$("td").$("input").getAttribute("id")); //все ок
+            String contactName = element.$("td").sibling(1)
+                    .getText();
+            String contactLastName = element.$("td").sibling(0)
+                    .getText();
+            ContactData contactData = new ContactData(contactName, null, contactLastName, null);
+            //contactData.setId(id);
+            contacts.add(contactData);
+        }
+        return contacts;
+    }
+
+    @Step("Получить количество элементов на странице")
+    public int sizeOfContactList(Contacts contacts) {
+        return contacts.size();
     }
 
 }
