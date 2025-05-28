@@ -1,13 +1,11 @@
 package ru.ls.qa.school.addressbook.contacts;
 
-import com.codeborne.selenide.Selenide;
 import model.ContactData;
 import model.Contacts;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import pages.BasePage;
 import pages.contacts.ContactListPage;
 import ru.ls.qa.school.addressbook.BaseTest;
 
@@ -21,41 +19,44 @@ public class UpdatingContactTest extends BaseTest {
             .nicknameContactName(faker.name().firstName())
             .build();
 
+    public static ContactListPage page;
+
     @BeforeEach
     public void checkingContactOnPages() {
-        ContactListPage contactListPage = getPage.contactList().goToContactList();
-        if (contactListPage.checkingContactsOnPage()) {
-            getPage.contactList().goToCreateContact()
+        page = getPage.contactList().goToContactList();
+        if (page.checkingContactsOnPage()) {
+            page = page.goToCreateContact()
                     .fillContactForm(contactData)
                     .clickCreateContactButton();
         } else {
-            contactData = contactListPage.getFirstContact();
+            contactData = page.getFirstContact();
         }
 
     }
 
     @Test
-    @DisplayName("Изменение контакта")
+    @DisplayName("РР·РјРµРЅРµРЅРёРµ РєРѕРЅС‚Р°РєС‚Р°")
     public void testEditContact() {
-        Contacts beforeListOfContacts = getPage.contactList().getContactList();
-        int beforeSize = getPage.contactList().sizeOfContactList(beforeListOfContacts);
+        Contacts beforeListOfContacts = page.getContactList(); //TODO Р·Р°РјРµРЅРёС‚СЊ РІ РєР»Р°СЃСЃРµ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµ Contacts РЅР° ModelList<ContactData>
+        int beforeSize = page.sizeOfContactList(beforeListOfContacts);
 
-        ContactListPage contactListPage = getPage.contactList().goToContactList()
+        page = page.goToContactList()
                 .editCreatedContact(contactData)
-                .updateContactForm(contactData)
+                .updateContactForm(contactData) //TODO СЃРґРµР»Р°С‚СЊ РїСЂРѕРІРµСЂРєСѓ С‚РѕРіРѕ, С‡С‚Рѕ РјС‹ РїРѕС‚РѕРј РґРµР№СЃС‚РІРёС‚РµР»СЊРЅРѕ РїСЂРѕРІРµСЂРёРј
                 .clickCreateContactButton().goToContactList();
-        Contacts afterListOfContacts = getPage.contactList().getContactList();
-        int afterSize = getPage.contactList().sizeOfContactList(afterListOfContacts);
+
+        Contacts afterListOfContacts = page.getContactList();
+        int afterSize = page.sizeOfContactList(afterListOfContacts);
 
         assertThat(afterSize).
-                as("Количество элементов не изменилось").
+                as("РљРѕР»РёС‡РµСЃС‚РІРѕ СЌР»РµРјРµРЅС‚РѕРІ РЅРµ РёР·РјРµРЅРёР»РѕСЃСЊ").
                 isEqualTo(beforeSize);
 
-        assertThat(afterListOfContacts.without(contactData))
-                .as("Список контактов, исключая измененный, остался прежним")
+        assertThat(afterListOfContacts)
+                .as("РЎРїРёСЃРѕРє РєРѕРЅС‚Р°РєС‚РѕРІ, РёСЃРєР»СЋС‡Р°СЏ РёР·РјРµРЅРµРЅРЅС‹Р№, РѕСЃС‚Р°Р»СЃСЏ РїСЂРµР¶РЅРёРј")
                 .usingRecursiveComparison()
                 .ignoringFields("contactMiddleName", "nicknameContactName")
-                .isEqualTo(beforeListOfContacts.without(contactData));
+                .isEqualTo(beforeListOfContacts);
     }
 
     @AfterEach

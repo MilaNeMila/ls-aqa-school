@@ -4,12 +4,9 @@ import com.google.common.collect.ForwardingSet;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
-import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.TreeSet;
 
 @Data
 @Builder
@@ -36,5 +33,9 @@ public class Contacts extends ForwardingSet<ContactData> {
         return contacts;
     }
 
-
+    public Contacts withAdd(ContactData contact) {
+        Contacts contacts = new Contacts(this);
+        contacts.add(contact);
+        return contacts;
+    }
 }

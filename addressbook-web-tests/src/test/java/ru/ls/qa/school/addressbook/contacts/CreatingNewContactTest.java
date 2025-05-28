@@ -20,7 +20,7 @@ public class CreatingNewContactTest extends BaseTest {
             .build();
 
     @Test
-    @DisplayName("Создание нового контакта")
+    @DisplayName("РЎРѕР·РґР°РЅРёРµ РЅРѕРІРѕРіРѕ РєРѕРЅС‚Р°РєС‚Р°")
     public void testCreateNewContact() {
         Contacts beforeListOfContacts = getPage.contactList().getContactList();
         int beforeSize = getPage.contactList().sizeOfContactList(beforeListOfContacts);
@@ -34,17 +34,17 @@ public class CreatingNewContactTest extends BaseTest {
         int afterSize = getPage.contactList().sizeOfContactList(afterListOfContacts);
 
         assertThat(afterSize).
-                as("Количество элементов увеличилось на 1").
+                as("РљРѕР»РёС‡РµСЃС‚РІРѕ СЌР»РµРјРµРЅС‚РѕРІ СѓРІРµР»РёС‡РёР»РѕСЃСЊ РЅР° 1").
                 isEqualTo(beforeSize + 1);
 
-        assertThat(afterListOfContacts.without(contactData))
-                .as("Созданные контакты не изменились")
+        assertThat(afterListOfContacts)
+                .as("РЎРѕР·РґР°РЅРЅС‹Рµ РєРѕРЅС‚Р°РєС‚С‹ РЅРµ РёР·РјРµРЅРёР»РёСЃСЊ")
                 .usingRecursiveComparison()
                 .ignoringFields("contactMiddleName", "nicknameContactName")
-                .isEqualTo(beforeListOfContacts);
+                .isEqualTo(beforeListOfContacts.withAdd(contactData));
     }
 
-    @AfterEach
+   // @AfterEach
     public void removeCreatedContact() {
         ContactListPage contactListPage = getPage.contactList().goToContactList()
                 .removeContact(contactData);
